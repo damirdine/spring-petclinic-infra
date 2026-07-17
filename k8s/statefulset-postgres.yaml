@@ -8,24 +8,24 @@ spec:
   serviceName: "postgres"
   replicas: 1
   selector:
-    matchLabels: {app: postgres}
+    matchLabels: { app: postgres }
   template:
     metadata:
-      labels: {app: postgres}
+      labels: { app: postgres }
     spec:
-      nodeSelector: {role: app}
+      nodeSelector: { role: app }
       containers:
         - name: postgres
           image: postgres:16-alpine
           env:
-            - {name: POSTGRES_DB,     value: petclinic}
-            - {name: POSTGRES_USER,   value: petclinic}
-            - {name: POSTGRES_PASSWORD, value: petclinic}
+            - { name: POSTGRES_DB, value: petclinic }
+            - { name: POSTGRES_USER, value: petclinic }
+            - { name: POSTGRES_PASSWORD, value: petclinic }
           readinessProbe:
-            exec: {command: ["pg_isready", "-U", "petclinic"]}
+            exec: { command: ["pg_isready", "-U", "petclinic"] }
             periodSeconds: 5
           volumeMounts:
-            - {name: pgdata, mountPath: /var/lib/postgresql/data}
+            - { name: pgdata, mountPath: /var/lib/postgresql/data }
   volumeClaimTemplates:
     - metadata:
         name: pgdata
@@ -41,6 +41,6 @@ metadata:
   name: postgres
   namespace: petclinic-dev
 spec:
-  selector: {app: postgres}
-  ports: [{port: 5432}]
+  selector: { app: postgres }
+  ports: [{ port: 5432 }]
   clusterIP: None
