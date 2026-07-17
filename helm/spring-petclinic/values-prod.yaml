@@ -1,0 +1,27 @@
+app:
+  image:
+    tag: latest
+  replicas: 3
+
+resources:
+  app:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
+  postgres:
+    requests:
+      memory: "256Mi"
+      cpu: "200m"
+    limits:
+      memory: "512Mi"
+      cpu: "500m"
+
+ingress:
+  enabled: true
+  host: spring-petclinic.localhost
+
+storage:
+  size: 5Gi
